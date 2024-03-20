@@ -377,3 +377,117 @@ upstreams:
       - tags:
           - dev
         target: api.test.example.com:443
+plugins:
+  - config:
+      echo_downstream: false
+      generator: uuid
+      header_name: x-uos-correlation-id
+    enabled: true
+    name: correlation-id
+    protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+  - config:
+      day: null
+      error_code: 429
+      error_message: API rate limit exceeded
+      fault_tolerant: true
+      header_name: null
+      hide_client_headers: false
+      hour: null
+      limit_by: consumer
+      minute: null
+      month: null
+      path: null
+      policy: local
+      redis_database: 0
+      redis_host: null
+      redis_password: null
+      redis_port: 6379
+      redis_server_name: null
+      redis_ssl: false
+      redis_ssl_verify: false
+      redis_timeout: 2000
+      redis_username: null
+      second: 100
+      year: null
+    enabled: true
+    name: rate-limiting
+    protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+  - config:
+      allowed_payload_size: 100
+      require_content_length: false
+      size_unit: kilobytes
+    enabled: true
+    name: request-size-limiting
+    protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+  - config:
+      content_type: application/json
+      custom_fields_by_lua: []
+      flush_timeout: 2
+      headers:
+        Authorization: Splunk 1fef7417-3fe0-46a1-801b-04164660a59b
+      http_endpoint: https://prd-p-s3ws6.splunkcloud.com:8088/services/collector/raw
+      keepalive: 60000
+      method: POST
+      queue:
+        initial_retry_delay: 0.01
+        max_batch_size: 10
+        max_bytes: null
+        max_coalescing_delay: 1
+        max_entries: 10000
+        max_retry_delay: 60
+        max_retry_time: 60
+      queue_size: null
+      retry_count: null
+      timeout: 10000
+    enabled: true
+    name: http-log
+    protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+  - config:
+      allow:
+        - 49.249.17.98
+      deny: null
+      message: The service is currently unavailable.
+      status: null
+    enabled: true
+    name: ip-restriction
+    protocols:
+      - http
+      - https
+      - tcp
+      - tls
+      - grpc
+      - grpcs
+  - config:
+      anonymous: null
+      hide_credentials: false
+      key_in_body: false
+      key_in_header: true
+      key_in_query: true
+      key_names:
+        - apikey
+      run_on_preflight: true
+    enabled: true
+    name: key-auth
+    protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+      - ws
+      - wss
