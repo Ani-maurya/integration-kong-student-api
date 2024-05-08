@@ -21,7 +21,7 @@ plugins:
     redis_ssl_verify: false
     redis_timeout: 2000
     redis_username: null
-    second: 10
+    second: 20
     year: null
   enabled: true
   name: rate-limiting
